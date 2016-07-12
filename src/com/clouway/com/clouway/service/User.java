@@ -13,6 +13,8 @@ public class User {
         this.lastName = lastName;
         this.age = age;
     }
+    
+    //// TODO: 12.07.16  
     public boolean isWithEmptyFirstName() {
         return firstName.isEmpty();
     }
