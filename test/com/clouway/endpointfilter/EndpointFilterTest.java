@@ -1,11 +1,8 @@
-package com.clouway.endpointfilter; /**
- * @author Aleksandar Hristov <Email:alexanderhristov93@gmail.com>
+package com.clouway.endpointfilter;
+
+/**
+ * @author Aleksandar Hristov <alexanderhristov93@gmail.com>
  */
-
-
-
-import com.clouway.endpointfilter.Endpoint;
-import com.clouway.endpointfilter.EndpointFilter;
 
 import org.jmock.Expectations;
 import org.jmock.Sequence;
@@ -16,9 +13,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by clouway on 07.07.16.
- */
+
 public class EndpointFilterTest {
     @Rule
     public JUnitRuleMockery context = new JUnitRuleMockery();
@@ -27,7 +22,7 @@ public class EndpointFilterTest {
     private EndpointFilter endpointFilter = new EndpointFilter(endpoint);
 
     @Test
-    public void endPointIsMatching() throws MissingURLException, MissingKeywordException {
+    public void happyPath() {
         context.checking(new Expectations() {{
             oneOf(endpoint).matches(with(any(String.class)));
             will(returnValue(true));
@@ -37,17 +32,17 @@ public class EndpointFilterTest {
     }
 
     @Test
-    public void endPointIsNotMatching() throws MissingURLException, MissingKeywordException {
+    public void endPointIsNotMatching() {
         context.checking(new Expectations() {{
-            oneOf(endpoint).matches("ThisUrlDoesNotMatch");
+            oneOf(endpoint).matches(with(any(String.class)));
             will(returnValue(false));
         }});
-        EndpointFilter endpointFilter = new EndpointFilter(endpoint);
-        assertFalse(endpointFilter.shouldFilter("ThisUrlDoesNotMatch"));
+        boolean result = endpointFilter.shouldFilter("test");
+        assertFalse(result);
     }
 
     @Test
-    public void endPointMany() throws MissingKeywordException, MissingURLException {
+    public void endPointMany() {
         final Sequence matchEndpoints = context.sequence("MatchEndpoints");
         Endpoint endpoint1 = context.mock(Endpoint.class, "endPoint1");
         Endpoint endpoint2 = context.mock(Endpoint.class, "endPoint2");
@@ -67,4 +62,3 @@ public class EndpointFilterTest {
         endpointFilter.shouldFilter("Url");
     }
 }
-

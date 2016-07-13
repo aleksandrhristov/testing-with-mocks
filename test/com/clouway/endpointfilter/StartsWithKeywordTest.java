@@ -13,28 +13,14 @@ import static org.junit.Assert.assertTrue;
  */
 public class StartsWithKeywordTest {
     @Test
-    public void endPointIsMatching() throws MissingURLException, MissingKeywordException {
+    public void endPointIsMatching() {
         StartsWithKeyword startsWithKeyword = new StartsWithKeyword("Start");
         assertTrue(startsWithKeyword.matches("Start with"));
     }
 
-    @Test(expected = MissingURLException.class)
-    public void emptyUrl() throws MissingURLException, MissingKeywordException {
-        StartsWithKeyword startsWithKeyword = new StartsWithKeyword("Start");
-        startsWithKeyword.matches("");
-    }
-
     @Test
-    public void endPointDoesNotMatch() throws MissingURLException, MissingKeywordException {
+    public void endPointNotMatch() {
         StartsWithKeyword startsWithKeyword = new StartsWithKeyword("StartKeyWord");
-
         assertFalse(startsWithKeyword.matches("SomeUrl"));
-    }
-
-    @Test(expected = MissingKeywordException.class)
-    public void emptyEndPoint() throws MissingURLException, MissingKeywordException {
-        StartsWithKeyword startsWithKeyword = new StartsWithKeyword("");
-
-        startsWithKeyword.matches("SomeUrl");
     }
 }
