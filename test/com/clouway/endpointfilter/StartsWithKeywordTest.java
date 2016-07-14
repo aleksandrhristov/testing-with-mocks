@@ -1,8 +1,7 @@
-/**
- * @author Aleksandar Hristov <Email:alexanderhristov93@gmail.com>
- */
 package com.clouway.endpointfilter;
-
+/**
+ * @author Aleksandar Hristov <alexanderhristov93@gmail.com>
+ */
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

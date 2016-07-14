@@ -13,7 +13,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-
 public class EndpointFilterTest {
     @Rule
     public JUnitRuleMockery context = new JUnitRuleMockery();
@@ -32,7 +31,7 @@ public class EndpointFilterTest {
     }
 
     @Test
-    public void endPointIsNotMatching() {
+    public void endPointNotMatches() {
         context.checking(new Expectations() {{
             oneOf(endpoint).matches(with(any(String.class)));
             will(returnValue(false));
@@ -49,16 +48,17 @@ public class EndpointFilterTest {
         EndpointFilter endpointFilter = new EndpointFilter(endpoint, endpoint1, endpoint2);
 
         context.checking(new Expectations() {{
-            oneOf(endpoint).matches("Url");
+            oneOf(endpoint).matches(with(any(String.class)));
             inSequence(matchEndpoints);
             will(returnValue(false));
-            oneOf(endpoint1).matches("Url");
+            oneOf(endpoint1).matches(with(any(String.class)));
             inSequence(matchEndpoints);
             will(returnValue(false));
-            oneOf(endpoint2).matches("Url");
+            oneOf(endpoint2).matches(with(any(String.class)));
             inSequence(matchEndpoints);
             will(returnValue(true));
         }});
+
         endpointFilter.shouldFilter("Url");
     }
 }

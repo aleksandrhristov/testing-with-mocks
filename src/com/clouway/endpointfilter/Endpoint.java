@@ -1,12 +1,9 @@
 package com.clouway.endpointfilter;
 
 /**
- * @author Aleksandar Hristov <Email:alexanderhristov93@gmail.com>
- * Created by clouway on 07.07.16.
+ * @author Aleksandar Hristov <alexanderhristov93@gmail.com>
  */
-// Interface which will be mocked !
-public interface Endpoint {
 
-    //Matching Url in String Format
+public interface Endpoint {
     boolean matches(String url);
 }
