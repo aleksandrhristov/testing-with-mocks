@@ -5,7 +5,6 @@ package com.clouway.endpointfilter;
  */
 
 import org.jmock.Expectations;
-import org.jmock.Sequence;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,7 +30,7 @@ public class EndpointFilterTest {
     }
 
     @Test
-    public void endPointNotMatches() {
+    public void endPointFilterNotMatches() {
         context.checking(new Expectations() {{
             oneOf(endpoint).matches(with(any(String.class)));
             will(returnValue(false));
@@ -41,21 +40,16 @@ public class EndpointFilterTest {
     }
 
     @Test
-    public void endPointMany() {
-        final Sequence matchEndpoints = context.sequence("MatchEndpoints");
+    public void multipleFitrations() {
         Endpoint endpoint1 = context.mock(Endpoint.class, "endPoint1");
         Endpoint endpoint2 = context.mock(Endpoint.class, "endPoint2");
         EndpointFilter endpointFilter = new EndpointFilter(endpoint, endpoint1, endpoint2);
-
         context.checking(new Expectations() {{
             oneOf(endpoint).matches(with(any(String.class)));
-            inSequence(matchEndpoints);
             will(returnValue(false));
             oneOf(endpoint1).matches(with(any(String.class)));
-            inSequence(matchEndpoints);
             will(returnValue(false));
             oneOf(endpoint2).matches(with(any(String.class)));
-            inSequence(matchEndpoints);
             will(returnValue(true));
         }});
 

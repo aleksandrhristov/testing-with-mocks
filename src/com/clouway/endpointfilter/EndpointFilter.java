@@ -11,8 +11,8 @@ public class EndpointFilter {
     }
 
     public boolean shouldFilter(String url) {
-        for (Endpoint each : endpoints) {
-            if (each.matches(url)) {
+        for (Endpoint endpoint : endpoints) {
+            if (endpoint.matches(url)) {
                 return true;
             }
         }

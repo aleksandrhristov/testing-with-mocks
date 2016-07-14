@@ -12,13 +12,13 @@ import static org.junit.Assert.assertTrue;
  */
 public class StartsWithKeywordTest {
     @Test
-    public void endPointIsMatching() {
+    public void endPointIsMatches() {
         StartsWithKeyword startsWithKeyword = new StartsWithKeyword("Start");
         assertTrue(startsWithKeyword.matches("Start with"));
     }
 
     @Test
-    public void endPointNotMatch() {
+    public void endPointNotMatches() {
         StartsWithKeyword startsWithKeyword = new StartsWithKeyword("StartKeyWord");
         assertFalse(startsWithKeyword.matches("SomeUrl"));
     }
